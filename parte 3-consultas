@@ -1,1 +1,84 @@
+db.quartos.find(
+  {
+    "caracteristicas.vista": "mar",
+    "caracteristicas.banheira": true
+  },
+  { _id: 0, numero: 1, tipo: 1, categoria: 1, preco_diaria: 1, caracteristicas: 1 }
+);
 
+// 2. Hospedes que reservaram mais de uma vez
+db.reservas.aggregate([
+  { $match: { status: { $ne: "cancelada" } } },
+  {
+    $group: {
+      _id: "$hospede_id",
+      nome: { $first: "$hospede_snapshot.nome" },
+      email: { $first: "$hospede_snapshot.email" },
+      total_reservas: { $sum: 1 },
+      total_noites: { $sum: "$num_noites" },
+      valor_acumulado: { $sum: "$valor_total" }
+    }
+  },
+  { $match: { total_reservas: { $gt: 1 } } },
+  { $sort: { total_reservas: -1 } }
+]);
+
+// 3. Faturamento em Abril de 2025
+db.pagamentos.aggregate([
+  {
+    $match: {
+      status: "pago",
+      data_pagamento: {
+        $gte: ISODate("2025-04-01T00:00:00Z"),
+        $lt: ISODate("2025-05-01T00:00:00Z")
+      }
+    }
+  },
+  {
+    $group: {
+      _id: "Abril/2025",
+      faturamento_total: { $sum: "$valor_total" },
+      quantidade_pagamentos: { $sum: 1 },
+      ticket_medio: { $avg: "$valor_total" }
+    }
+  }
+]);
+
+// 4. Meses com mais reservas e noites ocupadas
+db.reservas.aggregate([
+  { $match: { status: { $ne: "cancelada" } } },
+  {
+    $addFields: {
+      checkin_date: { $dateFromString: { dateString: "$data_checkin" } }
+    }
+  },
+  {
+    $group: {
+      _id: {
+        ano: { $year: "$checkin_date" },
+        mes: { $month: "$checkin_date" }
+      },
+      total_reservas: { $sum: 1 },
+      total_noites_vendidas: { $sum: "$num_noites" }
+    }
+  },
+  { $sort: { total_reservas: -1, total_noites_vendidas: -1 } }
+]);
+
+// 5. Dias da semana com mais check-ins (1 = Domingo ... 7 = Sabado)
+db.reservas.aggregate([
+  { $match: { status: { $ne: "cancelada" } } },
+  {
+    $addFields: {
+      checkin_date: { $dateFromString: { dateString: "$data_checkin" } }
+    }
+  },
+  {
+    $group: {
+      _id: { $dayOfWeek: "$checkin_date" },
+      total_checkins: { $sum: 1 },
+      total_noites: { $sum: "$num_noites" }
+    }
+  },
+  { $sort: { total_checkins: -1 } }
+]);
