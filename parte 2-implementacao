@@ -1,1 +1,480 @@
+// 1. hospedes
+db.hospedes.insertMany([
+  {
+    _id: ObjectId("660000000000000000000001"),
+    nome: "Carlos Andrade",
+    cpf: "123.456.789-00",
+    email: "carlos.andrade@email.com",
+    telefone: "+55 11 98765-4321",
+    data_nascimento: "1985-03-22",
+    nacionalidade: "Brasileiro",
+    endereco: {
+      logradouro: "Rua das Palmeiras, 142",
+      cidade: "São Paulo",
+      estado: "SP",
+      cep: "01310-100",
+      pais: "Brasil"
+    },
+    preferencias: {
+      tipo_quarto: "suite",
+      andar_alto: true,
+      fumante: false,
+      cama: "king"
+    },
+    data_cadastro: ISODate("2024-01-15T10:30:00Z"),
+    ativo: true
+  },
+  {
+    _id: ObjectId("660000000000000000000002"),
+    nome: "Fernanda Lima",
+    cpf: "222.333.444-55",
+    email: "fernanda.lima@email.com",
+    telefone: "+55 21 99988-7766",
+    data_nascimento: "1992-07-14",
+    nacionalidade: "Brasileira",
+    endereco: {
+      logradouro: "Av. Atlântica, 890",
+      cidade: "Rio de Janeiro",
+      estado: "RJ",
+      cep: "22010-000",
+      pais: "Brasil"
+    },
+    preferencias: {
+      tipo_quarto: "luxo",
+      andar_alto: true,
+      fumante: false,
+      cama: "queen"
+    },
+    data_cadastro: ISODate("2024-06-10T15:00:00Z"),
+    ativo: true
+  },
+  {
+    _id: ObjectId("660000000000000000000003"),
+    nome: "Lucas Pereira",
+    cpf: "333.444.555-66",
+    email: "lucas.pereira@email.com",
+    telefone: "+55 31 98877-6655",
+    data_nascimento: "1990-11-05",
+    nacionalidade: "Brasileiro",
+    endereco: {
+      logradouro: "Rua da Bahia, 500",
+      cidade: "Belo Horizonte",
+      estado: "MG",
+      cep: "30160-011",
+      pais: "Brasil"
+    },
+    preferencias: {
+      tipo_quarto: "standard",
+      andar_alto: false,
+      fumante: false,
+      cama: "casal"
+    },
+    data_cadastro: ISODate("2025-01-20T09:15:00Z"),
+    ativo: true
+  }
+]);
 
+// 2. quartos
+db.quartos.insertMany([
+  {
+    _id: ObjectId("660000000000000000000101"),
+    numero: "101",
+    andar: 1,
+    tipo: "standard",
+    categoria: "economico",
+    capacidade_max: 2,
+    preco_diaria: 250.00,
+    descricao: "Quarto padrão com vista para o jardim interno.",
+    comodidades: ["ar-condicionado", "tv 42\"", "frigobar", "wifi", "cofre"],
+    caracteristicas: {
+      vista: "jardim",
+      banheira: false,
+      varanda: false,
+      area_m2: 28
+    },
+    status: "disponivel",
+    fotos: ["https://storage.hotelnebula.com/quartos/101/foto1.jpg"],
+    ultima_limpeza: ISODate("2025-03-31T08:00:00Z")
+  },
+  {
+    _id: ObjectId("660000000000000000000202"),
+    numero: "202",
+    andar: 2,
+    tipo: "luxo",
+    categoria: "luxo",
+    capacidade_max: 2,
+    preco_diaria: 550.00,
+    descricao: "Quarto luxo com varanda e vista para o mar.",
+    comodidades: ["ar-condicionado", "tv 55\"", "frigobar", "wifi", "cofre", "cafeteira"],
+    caracteristicas: {
+      vista: "mar",
+      banheira: false,
+      varanda: true,
+      area_m2: 40
+    },
+    status: "disponivel",
+    fotos: ["https://storage.hotelnebula.com/quartos/202/foto1.jpg"],
+    ultima_limpeza: ISODate("2025-04-01T09:30:00Z")
+  },
+  {
+    _id: ObjectId("660000000000000000000305"),
+    numero: "305",
+    andar: 3,
+    tipo: "suite",
+    categoria: "luxo",
+    capacidade_max: 4,
+    preco_diaria: 920.00,
+    descricao: "Suíte master panorâmica com vista para o mar e banheira.",
+    comodidades: ["ar-condicionado", "tv 65\"", "frigobar", "wifi", "cofre", "banheira", "roupao"],
+    caracteristicas: {
+      vista: "mar",
+      banheira: true,
+      varanda: true,
+      area_m2: 65
+    },
+    status: "ocupado",
+    fotos: ["https://storage.hotelnebula.com/quartos/305/foto1.jpg"],
+    ultima_limpeza: ISODate("2025-04-02T10:00:00Z")
+  }
+]);
+
+// 3. funcionarios
+db.funcionarios.insertMany([
+  {
+    _id: ObjectId("660000000000000000000055"),
+    nome: "Juliana Martins",
+    cpf: "987.654.321-11",
+    email: "juliana.martins@hotelnebula.com",
+    telefone: "+55 21 99123-4567",
+    cargo: "recepcionista",
+    departamento: "recepção",
+    turno: { tipo: "manha", entrada: "07:00", saida: "15:00" },
+    permissoes: ["checkin", "checkout", "reservas_visualizar", "reservas_editar"],
+    data_admissao: "2022-08-01",
+    salario: 3200.00,
+    ativo: true
+  },
+  {
+    _id: ObjectId("660000000000000000000088"),
+    nome: "Roberto Silva",
+    cpf: "456.789.123-22",
+    email: "roberto.silva@hotelnebula.com",
+    telefone: "+55 21 99234-5678",
+    cargo: "recepcionista",
+    departamento: "recepção",
+    turno: { tipo: "tarde", entrada: "15:00", saida: "23:00" },
+    permissoes: ["checkin", "checkout", "reservas_visualizar"],
+    data_admissao: "2023-03-15",
+    salario: 3200.00,
+    ativo: true
+  }
+]);
+
+// 4. servicos
+db.servicos.insertMany([
+  {
+    _id: ObjectId("660000000000000000000303"),
+    nome: "Café da manhã",
+    categoria: "alimentacao",
+    descricao: "Café da manhã completo no restaurante do hotel.",
+    preco: 45.00,
+    unidade: "pessoa",
+    disponivel: true,
+    horario_disponivel: { inicio: "06:30", fim: "10:30" },
+    tags: ["incluso_suite", "buffet", "opcao_vegana"]
+  },
+  {
+    _id: ObjectId("660000000000000000000311"),
+    nome: "Lavanderia",
+    categoria: "conveniencia",
+    descricao: "Lavagem e passadoria de peças.",
+    preco: 80.00,
+    unidade: "pacote",
+    disponivel: true,
+    horario_disponivel: { inicio: "08:00", fim: "18:00" },
+    tags: ["expresso"]
+  },
+  {
+    _id: ObjectId("660000000000000000000319"),
+    nome: "Minibar",
+    categoria: "alimentacao",
+    descricao: "Consumo de bebidas e snacks do frigobar.",
+    preco: 25.00,
+    unidade: "item",
+    disponivel: true,
+    horario_disponivel: { inicio: "00:00", fim: "23:59" },
+    tags: ["quarto"]
+  }
+]);
+
+// 5. reservas
+db.reservas.insertMany([
+  {
+    _id: ObjectId("660000000000000000001001"),
+    hospede_id: ObjectId("660000000000000000000001"),
+    hospede_snapshot: {
+      nome: "Carlos Andrade",
+      email: "carlos.andrade@email.com",
+      telefone: "+55 11 98765-4321"
+    },
+    quarto_id: ObjectId("660000000000000000000101"),
+    quarto_snapshot: {
+      numero: "101",
+      tipo: "standard",
+      preco_diaria: 250.00
+    },
+    data_checkin: "2025-04-10",
+    data_checkout: "2025-04-14",
+    num_noites: 4,
+    num_hospedes: 2,
+    valor_total: 1000.00,
+    status: "concluida",
+    canal: "site_proprio",
+    codigo_reserva: "HN-2025-00142",
+    observacoes: "Solicita berço para bebê.",
+    data_criacao: ISODate("2025-03-28T14:22:00Z"),
+    data_atualizacao: ISODate("2025-04-14T11:10:00Z")
+  },
+  {
+    _id: ObjectId("660000000000000000001002"),
+    hospede_id: ObjectId("660000000000000000000002"),
+    hospede_snapshot: {
+      nome: "Fernanda Lima",
+      email: "fernanda.lima@email.com",
+      telefone: "+55 21 99988-7766"
+    },
+    quarto_id: ObjectId("660000000000000000000305"),
+    quarto_snapshot: {
+      numero: "305",
+      tipo: "suite",
+      preco_diaria: 920.00
+    },
+    data_checkin: "2025-04-18",
+    data_checkout: "2025-04-21",
+    num_noites: 3,
+    num_hospedes: 2,
+    valor_total: 2760.00,
+    status: "concluida",
+    canal: "booking",
+    codigo_reserva: "HN-2025-00143",
+    observacoes: "",
+    data_criacao: ISODate("2025-04-02T10:00:00Z"),
+    data_atualizacao: ISODate("2025-04-21T11:30:00Z")
+  },
+  {
+    _id: ObjectId("660000000000000000001003"),
+    hospede_id: ObjectId("660000000000000000000001"),
+    hospede_snapshot: {
+      nome: "Carlos Andrade",
+      email: "carlos.andrade@email.com",
+      telefone: "+55 11 98765-4321"
+    },
+    quarto_id: ObjectId("660000000000000000000202"),
+    quarto_snapshot: {
+      numero: "202",
+      tipo: "luxo",
+      preco_diaria: 550.00
+    },
+    data_checkin: "2025-07-11",
+    data_checkout: "2025-07-14",
+    num_noites: 3,
+    num_hospedes: 2,
+    valor_total: 1650.00,
+    status: "confirmada",
+    canal: "site_proprio",
+    codigo_reserva: "HN-2025-00199",
+    observacoes: "Aniversário de casamento.",
+    data_criacao: ISODate("2025-05-10T18:45:00Z"),
+    data_atualizacao: ISODate("2025-05-10T18:45:00Z")
+  },
+  {
+    _id: ObjectId("660000000000000000001004"),
+    hospede_id: ObjectId("660000000000000000000003"),
+    hospede_snapshot: {
+      nome: "Lucas Pereira",
+      email: "lucas.pereira@email.com",
+      telefone: "+55 31 98877-6655"
+    },
+    quarto_id: ObjectId("660000000000000000000101"),
+    quarto_snapshot: {
+      numero: "101",
+      tipo: "standard",
+      preco_diaria: 250.00
+    },
+    data_checkin: "2025-04-25",
+    data_checkout: "2025-04-27",
+    num_noites: 2,
+    num_hospedes: 1,
+    valor_total: 500.00,
+    status: "concluida",
+    canal: "telefone",
+    codigo_reserva: "HN-2025-00150",
+    observacoes: "",
+    data_criacao: ISODate("2025-04-20T09:10:00Z"),
+    data_atualizacao: ISODate("2025-04-27T11:00:00Z")
+  }
+]);
+
+// 6. hospedagens
+db.hospedagens.insertMany([
+  {
+    _id: ObjectId("660000000000000000002001"),
+    reserva_id: ObjectId("660000000000000000001001"),
+    hospede_id: ObjectId("660000000000000000000001"),
+    quarto_id: ObjectId("660000000000000000000101"),
+    checkin_real: ISODate("2025-04-10T14:35:00Z"),
+    checkout_real: ISODate("2025-04-14T11:10:00Z"),
+    status: "encerrada",
+    funcionario_checkin_id: ObjectId("660000000000000000000055"),
+    funcionario_checkout_id: ObjectId("660000000000000000000088"),
+    servicos_consumidos: [
+      {
+        servico_id: ObjectId("660000000000000000000303"),
+        nome: "Café da manhã",
+        quantidade: 2,
+        preco_unitario: 45.00,
+        total: 90.00,
+        data: ISODate("2025-04-11T08:15:00Z")
+      },
+      {
+        servico_id: ObjectId("660000000000000000000311"),
+        nome: "Lavanderia",
+        quantidade: 1,
+        preco_unitario: 80.00,
+        total: 80.00,
+        data: ISODate("2025-04-12T10:00:00Z")
+      },
+      {
+        servico_id: ObjectId("660000000000000000000319"),
+        nome: "Minibar",
+        quantidade: 3,
+        preco_unitario: 25.00,
+        total: 75.00,
+        data: ISODate("2025-04-13T22:30:00Z")
+      }
+    ],
+    total_servicos: 245.00,
+    total_diarias: 1000.00,
+    total_geral: 1245.00,
+    observacoes: "Hóspede solicitou late checkout, atendido."
+  },
+  {
+    _id: ObjectId("660000000000000000002002"),
+    reserva_id: ObjectId("660000000000000000001002"),
+    hospede_id: ObjectId("660000000000000000000002"),
+    quarto_id: ObjectId("660000000000000000000305"),
+    checkin_real: ISODate("2025-04-18T14:10:00Z"),
+    checkout_real: ISODate("2025-04-21T11:30:00Z"),
+    status: "encerrada",
+    funcionario_checkin_id: ObjectId("660000000000000000000055"),
+    funcionario_checkout_id: ObjectId("660000000000000000000055"),
+    servicos_consumidos: [
+      {
+        servico_id: ObjectId("660000000000000000000319"),
+        nome: "Minibar",
+        quantidade: 4,
+        preco_unitario: 25.00,
+        total: 100.00,
+        data: ISODate("2025-04-19T21:00:00Z")
+      }
+    ],
+    total_servicos: 100.00,
+    total_diarias: 2760.00,
+    total_geral: 2860.00,
+    observacoes: ""
+  },
+  {
+    _id: ObjectId("660000000000000000002003"),
+    reserva_id: ObjectId("660000000000000000001004"),
+    hospede_id: ObjectId("660000000000000000000003"),
+    quarto_id: ObjectId("660000000000000000000101"),
+    checkin_real: ISODate("2025-04-25T15:00:00Z"),
+    checkout_real: ISODate("2025-04-27T11:00:00Z"),
+    status: "encerrada",
+    funcionario_checkin_id: ObjectId("660000000000000000000088"),
+    funcionario_checkout_id: ObjectId("660000000000000000000055"),
+    servicos_consumidos: [],
+    total_servicos: 0.00,
+    total_diarias: 500.00,
+    total_geral: 500.00,
+    observacoes: ""
+  }
+]);
+
+// 7. pagamentos
+db.pagamentos.insertMany([
+  {
+    _id: ObjectId("660000000000000000003001"),
+    hospedagem_id: ObjectId("660000000000000000002001"),
+    reserva_id: ObjectId("660000000000000000001001"),
+    hospede_id: ObjectId("660000000000000000000001"),
+    valor_total: 1245.00,
+    status: "pago",
+    data_pagamento: ISODate("2025-04-14T11:05:00Z"),
+    parcelas: [
+      { metodo: "cartao_credito", bandeira: "Visa", valor: 1000.00, num_parcelas: 1, status: "aprovado", transacao_id: "TXN-VISA-00392" },
+      { metodo: "pix", valor: 245.00, status: "aprovado", transacao_id: "TXN-PIX-00841" }
+    ],
+    nota_fiscal: "NF-e 000421",
+    data_criacao: ISODate("2025-04-14T11:05:00Z")
+  },
+  {
+    _id: ObjectId("660000000000000000003002"),
+    hospedagem_id: ObjectId("660000000000000000002002"),
+    reserva_id: ObjectId("660000000000000000001002"),
+    hospede_id: ObjectId("660000000000000000000002"),
+    valor_total: 2860.00,
+    status: "pago",
+    data_pagamento: ISODate("2025-04-21T11:25:00Z"),
+    parcelas: [
+      { metodo: "cartao_credito", bandeira: "Mastercard", valor: 2860.00, num_parcelas: 3, status: "aprovado", transacao_id: "TXN-MC-00912" }
+    ],
+    nota_fiscal: "NF-e 000422",
+    data_criacao: ISODate("2025-04-21T11:25:00Z")
+  },
+  {
+    _id: ObjectId("660000000000000000003003"),
+    hospedagem_id: ObjectId("660000000000000000002003"),
+    reserva_id: ObjectId("660000000000000000001004"),
+    hospede_id: ObjectId("660000000000000000000003"),
+    valor_total: 500.00,
+    status: "pago",
+    data_pagamento: ISODate("2025-04-27T10:55:00Z"),
+    parcelas: [
+      { metodo: "pix", valor: 500.00, status: "aprovado", transacao_id: "TXN-PIX-00999" }
+    ],
+    nota_fiscal: "NF-e 000423",
+    data_criacao: ISODate("2025-04-27T10:55:00Z")
+  }
+]);
+
+// 8. feedbacks
+db.feedbacks.insertMany([
+  {
+    _id: ObjectId("660000000000000000004001"),
+    hospede_id: ObjectId("660000000000000000000001"),
+    hospedagem_id: ObjectId("660000000000000000002001"),
+    quarto_id: ObjectId("660000000000000000000101"),
+    data_avaliacao: ISODate("2025-04-15T09:00:00Z"),
+    nota_geral: 4.5,
+    notas_detalhadas: { limpeza: 5, atendimento: 5, conforto: 4, custo_beneficio: 4, localizacao: 5 },
+    comentario: "Ótima estadia! A equipe foi muito atenciosa e o quarto estava impecável.",
+    resposta_hotel: {
+      texto: "Obrigado pelo feedback, Carlos! Esperamos recebê-lo novamente em breve.",
+      data: ISODate("2025-04-16T10:30:00Z"),
+      funcionario_id: ObjectId("660000000000000000000055")
+    },
+    visivel: true
+  },
+  {
+    _id: ObjectId("660000000000000000004002"),
+    hospede_id: ObjectId("660000000000000000000002"),
+    hospedagem_id: ObjectId("660000000000000000002002"),
+    quarto_id: ObjectId("660000000000000000000305"),
+    data_avaliacao: ISODate("2025-04-22T14:00:00Z"),
+    nota_geral: 5.0,
+    notas_detalhadas: { limpeza: 5, atendimento: 5, conforto: 5, custo_beneficio: 4, localizacao: 5 },
+    comentario: "Suíte maravilhosa, vista para o mar incrível e banheira excelente.",
+    visivel: true
+  }
+]);
